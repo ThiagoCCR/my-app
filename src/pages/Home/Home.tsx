@@ -1,10 +1,19 @@
-import homeImage from '../../assets/home-img.jpg';
-import { Wrapper } from './Home.styles';
+import { FC } from 'react';
 
-export const Home = () => {
-  return (
-    <Wrapper>
+import homeImage from '../../assets/home-img.jpg';
+import { Header } from '../../components/Header';
+import { HomePageWelcomeMessage } from '../../components/HomePageWelcomeMessage';
+import { ImgContainer, Wrapper } from './Home.styles';
+
+export const Home: FC = (): JSX.Element => (
+  <Wrapper>
+    <Header />
+    <ImgContainer>
       <img alt="HomePic" src={homeImage} />
-    </Wrapper>
-  );
-};
+      <div>
+        <h1>Writer</h1>
+      </div>
+    </ImgContainer>
+    <HomePageWelcomeMessage />
+  </Wrapper>
+);
