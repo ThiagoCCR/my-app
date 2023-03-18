@@ -1,11 +1,14 @@
-import { FC } from 'react';
+import { createElement, FC } from 'react';
 
 import homeImage from '../../assets/home-img.jpg';
 import { Header } from '../../components/Header';
-import { HomePageWelcomeMessage } from '../../components/HomePageWelcomeMessage';
 import { ImgContainer, Wrapper } from './Home.styles';
 
-export const Home: FC = (): JSX.Element => (
+interface HomeProps {
+  message: FC;
+}
+
+export const Home: FC<HomeProps> = ({ message }): JSX.Element => (
   <Wrapper>
     <Header />
     <ImgContainer>
@@ -14,6 +17,6 @@ export const Home: FC = (): JSX.Element => (
         <h1>Writer</h1>
       </div>
     </ImgContainer>
-    <HomePageWelcomeMessage />
+    {createElement(message)}
   </Wrapper>
 );

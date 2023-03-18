@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { IoEnterOutline } from 'react-icons/io5';
+import { Link } from 'react-router-dom';
 
 import { HeaderButtons, Wrapper } from './Header.styles';
 
@@ -10,9 +11,11 @@ export const Header: FC = (): JSX.Element => {
       <HeaderButtons>
         <span>SOBRE</span>
         <span>BLOG</span>
-        <span>
-          ENTRAR <IoEnterOutline />
-        </span>
+        <Link to="/sign-in">
+          <span>
+            ENTRAR <IoEnterOutline />
+          </span>
+        </Link>
       </HeaderButtons>
     </Wrapper>
   );
