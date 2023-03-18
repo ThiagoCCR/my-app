@@ -1,7 +1,7 @@
 import { ChangeEventHandler, FC, FormEventHandler, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
-import { LoginError } from '../../config/consts/errorMessages';
+import { SignUpError } from '../../config/consts/errorMessages';
 import { Wrapper } from '../HomePageWelcomeMessage/HomePageWelcomeMessage.styles';
 import { StyledButton, StyledForm, StyledInput } from './SignUpForm.style';
 
@@ -22,7 +22,7 @@ export const SignUpForm: FC = (): JSX.Element => {
       await setTimeout(() => {}, 3000);
       navigate('/home');
     } catch (err) {
-      console.error(LoginError);
+      console.error(SignUpError);
     }
   };
 

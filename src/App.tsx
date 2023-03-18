@@ -6,6 +6,7 @@ import { HomePageWelcomeMessage } from './components/HomePageWelcomeMessage';
 import { SignInForm } from './components/SignInForm';
 import { SignUpForm } from './components/Signup';
 import { Home } from './pages/Home';
+import { Userpage } from './pages/Userpage/Userpage';
 
 const App: FC = (): JSX.Element => {
   return (
@@ -16,6 +17,7 @@ const App: FC = (): JSX.Element => {
           <Route element={<Home message={HomePageWelcomeMessage} />} path="/" />
           <Route element={<Home message={SignInForm} />} path="/sign-in" />
           <Route element={<Home message={SignUpForm} />} path="/sign-up" />
+          <Route element={<Userpage />} path="/userpage" />
         </Routes>
       </BrowserRouter>
     </>
