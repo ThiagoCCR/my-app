@@ -1,5 +1,5 @@
 import { FC, FormEventHandler, useState } from 'react';
-import { useNavigate, Navigate, Link } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 
 import { LoginError } from '../../config/consts/errorMessages';
 import { Wrapper } from '../HomePageWelcomeMessage/HomePageWelcomeMessage.styles';
@@ -52,9 +52,6 @@ export const SignInForm: FC = (): JSX.Element => {
             value={password}
           />
           <StyledButton type="submit">ENTRAR</StyledButton>
-          <Link to="/sign-up">
-            <h2>Primeira Vez? Cadastre-se!</h2>
-          </Link>
         </StyledForm>
       </div>
     </Wrapper>

@@ -5,7 +5,7 @@ export const StyledForm = styled.form`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
   a {
     text-decoration: none;
     color: #ffffff;
