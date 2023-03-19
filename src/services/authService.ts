@@ -2,7 +2,7 @@ import api from './api';
 
 export interface AuthResponse {
   aluno_id: string | null;
-  acess_token: string;
+  access_token: string;
   token_type: string;
   expires_at: string;
 }

@@ -15,10 +15,11 @@ export const SignInForm: FC = (): JSX.Element => {
     e.preventDefault();
     try {
       const userData = await signIn(email, password);
-      // console.log(userData);
-      const infoJSON = JSON.stringify({ token: userData.acess_token });
+      const infoJSON = JSON.stringify({
+        token: userData.access_token,
+        studentId: userData.aluno_id,
+      });
       localStorage.setItem('writer', infoJSON);
-      // console.log(infoJSON);
       navigate('/userpage');
     } catch (err) {
       console.error(LoginError);

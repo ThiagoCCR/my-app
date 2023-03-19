@@ -1,7 +1,8 @@
-import { FC } from 'react';
+import { FC, useCallback, useEffect } from 'react';
 
 import { Essay } from '../../components/Essay';
 import { UserpageMenu } from '../../components/UserpageMenu';
+import { EssayInterface, getStudentEssays } from '../../services/essaysService';
 import {
   Wrapper,
   EssaysContainer,
@@ -9,12 +10,28 @@ import {
   SiteLogo,
 } from './Userpage.style';
 
-// interface AuthModel {
-//   user: string;
-//   token: string;
-// }
+interface AuthResponse {
+  token: string;
+  studentId: string;
+}
+
 export const Userpage: FC = (): JSX.Element => {
-  // const auth = JSON.parse(localStorage.getItem('writer') || '{}') as AuthModel;
+  const { token, studentId } = JSON.parse(
+    localStorage.getItem('writer') || '{}'
+  ) as AuthResponse;
+
+  const renderEssays = useCallback(async () => {
+    if (studentId) {
+      const essaysData = await getStudentEssays(studentId, token);
+    } else {
+      // asdasd
+    }
+  }, [studentId, token]);
+
+  useEffect(() => {
+    renderEssays();
+  }, [renderEssays]);
+
   return (
     <Wrapper>
       <EssaysContainer>

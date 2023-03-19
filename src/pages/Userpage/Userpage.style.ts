@@ -27,8 +27,9 @@ export const SiteLogo = styled.div`
   right: 0;
   left: 0;
   height: 5rem;
+  padding-left: 3rem;
   background-color: #da6509;
-  display: grid;
+  display: flex;
   align-items: center;
   h1 {
     font-size: 2.5rem;
