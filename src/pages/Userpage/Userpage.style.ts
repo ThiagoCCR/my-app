@@ -9,14 +9,32 @@ export const Wrapper = styled.div`
 
 export const EssaysContainer = styled.div`
   min-height: 100vh;
-  width: 20rem;
+  width: 15rem;
   display: grid;
-  padding: 2rem;
+  padding-top: 8rem;
+  padding-bottom: 2rem;
   justify-content: center;
   align-items: center;
   gap: 2rem;
   background-color: #1d2c3d;
   overflow-y: scroll;
+  position: relative;
+`;
+
+export const SiteLogo = styled.div`
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 5rem;
+  background-color: #da6509;
+  display: grid;
+  align-items: center;
+  h1 {
+    font-size: 2.5rem;
+    font-family: 'Fasthand', cursive;
+    color: #ffffff;
+  }
 `;
 
 export const EssaysViewer = styled.div`

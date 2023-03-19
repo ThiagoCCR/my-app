@@ -1,35 +1,29 @@
 import { FC, FormEventHandler, useState } from 'react';
-import { useNavigate, Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { LoginError } from '../../config/consts/errorMessages';
+import { signIn } from '../../services/authService';
 import { Wrapper } from '../HomePageWelcomeMessage/HomePageWelcomeMessage.styles';
 import { StyledButton, StyledForm, StyledInput } from './SignInForm.style';
-
-interface AuthModel {
-  user: string;
-  token: string;
-}
 
 export const SignInForm: FC = (): JSX.Element => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const auth = JSON.parse(localStorage.getItem('writer') || '{}') as AuthModel;
   const navigate = useNavigate();
 
   const handleSignIn: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     try {
-      // eslint-disable-next-line @typescript-eslint/await-thenable
-      await setTimeout(() => {}, 3000);
-      navigate('/home');
+      const userData = await signIn(email, password);
+      // console.log(userData);
+      const infoJSON = JSON.stringify({ token: userData.acess_token });
+      localStorage.setItem('writer', infoJSON);
+      // console.log(infoJSON);
+      navigate('/userpage');
     } catch (err) {
       console.error(LoginError);
     }
   };
-
-  if (auth.token) {
-    return <Navigate to="/home" />;
-  }
 
   return (
     <Wrapper>
