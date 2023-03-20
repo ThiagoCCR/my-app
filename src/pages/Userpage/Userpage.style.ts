@@ -58,3 +58,19 @@ export const EssaysViewer = styled.div`
     width: 45rem;
   }
 `;
+
+export const PageCounter = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 0.2rem;
+  }
+`;

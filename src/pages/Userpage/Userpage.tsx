@@ -1,4 +1,5 @@
 import { FC, useCallback, useEffect, useState } from 'react';
+import { IoChevronBackOutline, IoChevronForwardOutline } from 'react-icons/io5';
 
 import { Essay } from '../../components/Essay';
 import { UserpageMenu } from '../../components/UserpageMenu';
@@ -13,6 +14,7 @@ import {
   EssaysContainer,
   EssaysViewer,
   SiteLogo,
+  PageCounter,
 } from './Userpage.style';
 
 interface AuthResponse {
@@ -27,6 +29,14 @@ export const Userpage: FC = (): JSX.Element => {
   const auth = JSON.parse(
     localStorage.getItem('writer') || '{}'
   ) as AuthResponse;
+
+  const handlePageChange = (operation: string) => {
+    if (operation === 'add') {
+      setPage(page + 1);
+    } else if (page > 1 && operation === 'subtract') {
+      setPage(page - 1);
+    }
+  };
 
   const renderEssays = useCallback(async () => {
     let essaysData;
@@ -65,6 +75,17 @@ export const Userpage: FC = (): JSX.Element => {
             student={curr.aluno}
           />
         ))}
+        <PageCounter>
+          <IoChevronBackOutline
+            color="#ffffff"
+            onClick={() => handlePageChange('subtract')}
+          />
+          <div>{page}</div>
+          <IoChevronForwardOutline
+            color="#ffffff"
+            onClick={() => handlePageChange('add')}
+          />
+        </PageCounter>
       </EssaysContainer>
       <EssaysViewer>
         <UserpageMenu />
