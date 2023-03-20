@@ -1,58 +1,28 @@
-import { FC, FormEventHandler, useState } from 'react';
-import { IoSearchSharp } from 'react-icons/io5';
+import { FC } from 'react';
+import { IoExitOutline } from 'react-icons/io5';
+import { useNavigate } from 'react-router-dom';
 
-import { SearchError } from '../../config/consts/errorMessages';
-import {
-  StyledButton,
-  StyledForm,
-  StyledInput,
-  StyledSelect,
-  Wrapper,
-} from './UserpageMenu.style';
+import { StyledButton, Wrapper } from './UserpageMenu.style';
 
 export const UserpageMenu: FC = (): JSX.Element => {
-  const [searchText, setSearchText] = useState<string>('');
-  const [searchMode, setSearchMode] = useState<string>('');
+  const navigate = useNavigate();
 
-  const handleSearch: FormEventHandler<HTMLFormElement> = (e) => {
-    e.preventDefault();
-    try {
-      if (searchMode === 'essay') {
-        // serach essay by id
-      } else {
-        // serach essay by student
-      }
-    } catch (err) {
-      console.error(SearchError);
-    }
+  const handleLogout = () => {
+    const infoJSON = JSON.stringify({});
+    localStorage.setItem('writer', infoJSON);
+    navigate('/');
   };
 
   return (
     <Wrapper>
-      <StyledForm onSubmit={handleSearch}>
-        <div>
-          <StyledInput
-            name="searchBar"
-            onChange={(e) => setSearchText(e.target.value)}
-            placeholder="Pesquisar redação"
-            required
-            value={searchText}
-          />
-          <StyledButton type="submit">
-            <IoSearchSharp color="#ffffff" font-size="1.5rem" />
-          </StyledButton>
-        </div>
-        <StyledSelect
-          defaultValue=""
-          onChange={(e) => setSearchMode(e.target.value)}
-        >
-          <option disabled hidden selected value="">
-            Procurar usando
-          </option>
-          <option value="essay">Número da redação</option>
-          <option value="student">Identificação do aluno</option>
-        </StyledSelect>{' '}
-      </StyledForm>
+      <StyledButton>NOVA REDAÇÃO</StyledButton>
+      <StyledButton>DELETAR</StyledButton>
+      <StyledButton>EDITAR</StyledButton>
+      <StyledButton onClick={handleLogout}>
+        <span>
+          SAIR <IoExitOutline />
+        </span>
+      </StyledButton>
     </Wrapper>
   );
 };

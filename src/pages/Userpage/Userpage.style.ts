@@ -57,10 +57,11 @@ export const FilesContainer = styled.div`
   height: 32rem;
   width: 47rem;
   overflow-y: scroll;
+  display: grid;
+  align-items: center;
   ::-webkit-scrollbar {
     display: none;
   }
-
   h1 {
     font-family: 'Righteous', cursive;
     color: #fff;
