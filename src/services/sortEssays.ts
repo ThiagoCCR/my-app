@@ -1,4 +1,4 @@
-import { SearchError } from '../config/consts/errorMessages';
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { EssayInterface, getEssayById } from './essaysService';
 
 interface AuthResponse {
@@ -12,28 +12,24 @@ export type EssayWithUrl = EssayInterface & {
   url: string;
 };
 
-const addUrlToEssays = (
-  essays: EssayInterface[]
-): Promise<EssayWithUrl>[] | [] => {
-  try {
-    const essaysData = essays.map(async (essay) => {
+const addUrlToEssays = (essays: EssayInterface[]) => {
+  return Promise.all(
+    essays.map(async (essay) => {
       const response = await getEssayById(essay.id, auth.token);
-      return { ...essay, url: response.data.urls[0].url };
-    });
-    return essaysData;
-  } catch (error) {
-    console.error(SearchError);
-  }
-  return [];
+      const finalEssay = { ...essay, url: response.urls[0].url };
+      return finalEssay;
+    })
+  );
 };
 
-export function sortEssays(
+export async function sortEssays(
   page: number,
   essays: EssayInterface[]
-): Promise<EssayWithUrl>[] | [] {
+): Promise<EssayWithUrl[]> {
   const pageLength = 4;
   const startEssay = (page - 1) * pageLength;
   const endEssay = startEssay + pageLength;
   const sortedArrays = essays.slice(startEssay, endEssay);
-  return addUrlToEssays(sortedArrays);
+  const response = await addUrlToEssays(sortedArrays);
+  return response;
 }

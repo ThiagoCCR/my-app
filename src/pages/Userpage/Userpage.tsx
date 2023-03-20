@@ -22,7 +22,7 @@ interface AuthResponse {
 
 export const Userpage: FC = (): JSX.Element => {
   const [page, setPage] = useState<number>(1);
-  const [essays, setEssays] = useState<Promise<EssayWithUrl>[] | []>([]);
+  const [essays, setEssays] = useState<EssayWithUrl[]>([]);
   const auth = JSON.parse(
     localStorage.getItem('writer') || '{}'
   ) as AuthResponse;
@@ -33,11 +33,11 @@ export const Userpage: FC = (): JSX.Element => {
     try {
       if (auth.studentId) {
         essaysData = await getStudentEssays(auth.studentId, auth.token);
-        sortedEssays = sortEssays(page, essaysData);
+        sortedEssays = await sortEssays(page, essaysData);
         setEssays(sortedEssays);
       } else {
         essaysData = await getEssaysForAdmin(auth.token);
-        sortedEssays = sortEssays(page, essaysData);
+        sortedEssays = await sortEssays(page, essaysData);
         setEssays(sortedEssays);
       }
     } catch (error) {
@@ -55,9 +55,14 @@ export const Userpage: FC = (): JSX.Element => {
         <SiteLogo>
           <h1>Writer</h1>
         </SiteLogo>
-        <Essay />
-        <Essay />
-        <Essay />
+        {essays.map((curr) => (
+          <Essay
+            key=""
+            imgUrl={curr.url}
+            school={curr.escola}
+            student={curr.aluno}
+          />
+        ))}
       </EssaysContainer>
       <EssaysViewer>
         <UserpageMenu />

@@ -1,11 +1,23 @@
 import { FC } from 'react';
 
-import { Wrapper } from './Essay.style';
+import { ImgContainer, Wrapper } from './Essay.style';
 
-export const Essay: FC = (): JSX.Element => {
+interface Props {
+  imgUrl: string;
+  school: object;
+  student: object;
+}
+
+export const Essay: FC<Props> = ({
+  imgUrl,
+  school,
+  student,
+}: Props): JSX.Element => {
   return (
     <Wrapper>
-      <div>a</div>
+      <ImgContainer>
+        <img alt="essayPic" src={imgUrl} />
+      </ImgContainer>
     </Wrapper>
   );
 };

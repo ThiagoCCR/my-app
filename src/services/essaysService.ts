@@ -17,16 +17,14 @@ export interface EssayData {
     };
     numero: number;
     created_at: string;
-    urls: [
-      {
-        id: string;
-        redacao_id: string;
-        correcao_id: string | null;
-        url: string;
-        anotacoes: string | null;
-        comentarios: string | null;
-      }
-    ];
+    urls: {
+      id: string;
+      redacao_id: string;
+      correcao_id: string | null;
+      url: string;
+      anotacoes: string | null;
+      comentarios: string | null;
+    }[];
   };
 }
 
@@ -49,5 +47,6 @@ export async function getEssayById(id: string, token: string) {
   const response = await api.get(`/redacao/${id}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
-  return response.data as EssayData;
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  return response.data.data as EssayData;
 }
