@@ -31,6 +31,7 @@ export const SiteLogo = styled.div`
   background-color: #da6509;
   display: flex;
   align-items: center;
+  z-index: 2;
   h1 {
     font-size: 2.5rem;
     font-family: 'Fasthand', cursive;
@@ -43,4 +44,17 @@ export const EssaysViewer = styled.div`
   min-height: 100vh;
   position: relative;
   background-color: #b6bbc0;
+  padding-top: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  h1 {
+    font-family: 'Righteous', cursive;
+    color: #fff;
+    font-size: 3rem;
+  }
+  img {
+    height: 30rem;
+    width: 45rem;
+  }
 `;

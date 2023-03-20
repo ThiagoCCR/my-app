@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { EssayInterface, getEssayById } from './essaysService';
 
 interface AuthResponse {
@@ -16,6 +15,7 @@ const addUrlToEssays = (essays: EssayInterface[]) => {
   return Promise.all(
     essays.map(async (essay) => {
       const response = await getEssayById(essay.id, auth.token);
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
       const finalEssay = { ...essay, url: response.urls[0].url };
       return finalEssay;
     })

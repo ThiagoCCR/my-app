@@ -23,6 +23,7 @@ interface AuthResponse {
 export const Userpage: FC = (): JSX.Element => {
   const [page, setPage] = useState<number>(1);
   const [essays, setEssays] = useState<EssayWithUrl[]>([]);
+  const [essayViewed, setEssayViewed] = useState<string>('');
   const auth = JSON.parse(
     localStorage.getItem('writer') || '{}'
   ) as AuthResponse;
@@ -58,6 +59,7 @@ export const Userpage: FC = (): JSX.Element => {
         {essays.map((curr) => (
           <Essay
             key=""
+            handleClick={setEssayViewed}
             imgUrl={curr.url}
             school={curr.escola}
             student={curr.aluno}
@@ -66,6 +68,11 @@ export const Userpage: FC = (): JSX.Element => {
       </EssaysContainer>
       <EssaysViewer>
         <UserpageMenu />
+        {essayViewed === '' ? (
+          <h1>Selecione uma redação para visualiza-la!</h1>
+        ) : (
+          <img alt="selectedEssay" src={essayViewed} />
+        )}
       </EssaysViewer>
     </Wrapper>
   );

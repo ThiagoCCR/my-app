@@ -9,6 +9,7 @@ export interface EssayInterface {
 }
 
 export interface EssayData {
+  [x: string]: any;
   data: {
     id: string;
     aluno: {

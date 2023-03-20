@@ -5,6 +5,9 @@ export const Wrapper = styled.div`
   width: 8rem;
   background-color: #ffffff;
   cursor: pointer;
+  :hover {
+    opacity: 0.5;
+  }
 `;
 
 export const ImgContainer = styled.div`
