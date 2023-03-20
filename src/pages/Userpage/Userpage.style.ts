@@ -19,6 +19,9 @@ export const EssaysContainer = styled.div`
   background-color: #1d2c3d;
   overflow-y: scroll;
   position: relative;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const SiteLogo = styled.div`
@@ -48,6 +51,16 @@ export const EssaysViewer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+export const FilesContainer = styled.div`
+  height: 32rem;
+  width: 47rem;
+  overflow-y: scroll;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
   h1 {
     font-family: 'Righteous', cursive;
     color: #fff;

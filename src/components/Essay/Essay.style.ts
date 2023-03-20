@@ -13,6 +13,15 @@ export const Wrapper = styled.div`
 export const ImgContainer = styled.div`
   width: 100%;
   height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  h1 {
+    font-weight: 700;
+    font-family: Righteous, cursive;
+  }
   img {
     height: 100%;
     width: 100%;

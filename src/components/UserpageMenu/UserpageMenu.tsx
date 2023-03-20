@@ -14,8 +14,7 @@ export const UserpageMenu: FC = (): JSX.Element => {
   const [searchText, setSearchText] = useState<string>('');
   const [searchMode, setSearchMode] = useState<string>('');
 
-  // eslint-disable-next-line @typescript-eslint/require-await
-  const handleSearch: FormEventHandler<HTMLFormElement> = async (e) => {
+  const handleSearch: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     try {
       if (searchMode === 'essay') {
@@ -43,7 +42,10 @@ export const UserpageMenu: FC = (): JSX.Element => {
             <IoSearchSharp color="#ffffff" font-size="1.5rem" />
           </StyledButton>
         </div>
-        <StyledSelect onChange={(e) => setSearchMode(e.target.value)}>
+        <StyledSelect
+          defaultValue=""
+          onChange={(e) => setSearchMode(e.target.value)}
+        >
           <option disabled hidden selected value="">
             Procurar usando
           </option>

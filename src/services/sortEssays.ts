@@ -5,19 +5,23 @@ interface AuthResponse {
   studentId: string;
 }
 
-const auth = JSON.parse(localStorage.getItem('writer') || '{}') as AuthResponse;
-
 export type EssayWithUrl = EssayInterface & {
   url: string;
 };
 
 const addUrlToEssays = (essays: EssayInterface[]) => {
+  const auth = JSON.parse(
+    localStorage.getItem('writer') || '{}'
+  ) as AuthResponse;
+
   return Promise.all(
     essays.map(async (essay) => {
       const response = await getEssayById(essay.id, auth.token);
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-      const finalEssay = { ...essay, url: response.urls[0].url };
-      return finalEssay;
+      if (response.data.urls?.length > 0) {
+        const finalEssay = { ...essay, url: response.data.urls[0].url };
+        return finalEssay;
+      }
+      return { ...essay, url: '' };
     })
   );
 };
