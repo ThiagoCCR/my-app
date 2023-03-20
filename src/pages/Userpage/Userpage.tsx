@@ -1,8 +1,13 @@
-import { FC, useCallback, useEffect } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 
 import { Essay } from '../../components/Essay';
 import { UserpageMenu } from '../../components/UserpageMenu';
-import { EssayInterface, getStudentEssays } from '../../services/essaysService';
+import { SearchError } from '../../config/consts/errorMessages';
+import {
+  getEssaysForAdmin,
+  getStudentEssays,
+} from '../../services/essaysService';
+import { EssayWithUrl, sortEssays } from '../../services/sortEssays';
 import {
   Wrapper,
   EssaysContainer,
@@ -16,21 +21,33 @@ interface AuthResponse {
 }
 
 export const Userpage: FC = (): JSX.Element => {
-  const { token, studentId } = JSON.parse(
+  const [page, setPage] = useState<number>(1);
+  const [essays, setEssays] = useState<Promise<EssayWithUrl>[] | []>([]);
+  const auth = JSON.parse(
     localStorage.getItem('writer') || '{}'
   ) as AuthResponse;
 
   const renderEssays = useCallback(async () => {
-    if (studentId) {
-      const essaysData = await getStudentEssays(studentId, token);
-    } else {
-      // asdasd
+    let essaysData;
+    let sortedEssays;
+    try {
+      if (auth.studentId) {
+        essaysData = await getStudentEssays(auth.studentId, auth.token);
+        sortedEssays = sortEssays(page, essaysData);
+        setEssays(sortedEssays);
+      } else {
+        essaysData = await getEssaysForAdmin(auth.token);
+        sortedEssays = sortEssays(page, essaysData);
+        setEssays(sortedEssays);
+      }
+    } catch (error) {
+      console.error(SearchError);
     }
-  }, [studentId, token]);
+  }, [page, auth.studentId, auth.token]);
 
   useEffect(() => {
     renderEssays();
-  }, [renderEssays]);
+  }, [renderEssays, page]);
 
   return (
     <Wrapper>
